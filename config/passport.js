@@ -14,6 +14,8 @@ module.exports = function(passport){
         // User.findOrCreate({ googleId: profile.id }, function (err, user) {
         //   return done(err, user);
         // });
+        console.log(accessToken);
+        console.log(refreshToken);
       }
     ));
 }
