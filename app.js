@@ -2,11 +2,23 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
+// load user model
+require('./models/User');
+
 // passport config 
 require('./config/passport')(passport);
 
 // load routes
 const auth = require('./routes/auth');
+
+//load keys
+const keys = require('./config/keys');
+// Map global promise
+mongoose.Promise = global.Promise;
+// connect mongoose 
+mongoose.connect(keys.mongoURI)
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err));
 
 const app = express();
 
