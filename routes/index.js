@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res)=>{
-    res.send(`Server start in port ${port}`);
+    res.render('index/welcome');
 });
 
 router.get('/dashboard', (req, res)=>{
