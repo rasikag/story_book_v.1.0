@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const session = require('express-session')
 const passport = require('passport');
 
 // load user model
@@ -9,6 +11,7 @@ require('./models/User');
 require('./config/passport')(passport);
 
 // load routes
+const index = require('./routes/index');
 const auth = require('./routes/auth');
 
 //load keys
@@ -22,12 +25,28 @@ mongoose.connect(keys.mongoURI)
 
 const app = express();
 
-app.get('/', (req, res)=>{
-    res.send(`Server start in port ${port}`);
+// cookie parser middleware
+app.use(cookieParser());
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}));
+
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
 });
 
 // use auth 
+app.use('/', index);
 app.use('/auth', auth);
+
 
 const port = process.env.PORT || 5001;
 
