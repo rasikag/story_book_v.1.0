@@ -1,4 +1,5 @@
 const express = require('express');
+const exphbs  = require('express-handlebars');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session')
@@ -25,6 +26,10 @@ mongoose.connect(keys.mongoURI)
 
 const app = express();
 
+// Handlebars middleware
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
 // cookie parser middleware
 app.use(cookieParser());
 app.use(session({
@@ -48,7 +53,7 @@ app.use('/', index);
 app.use('/auth', auth);
 
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5002;
 
 app.listen(port, () => {
     console.log(`Server start in port: ${port}`);
