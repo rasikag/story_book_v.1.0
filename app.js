@@ -55,7 +55,7 @@ app.use('/', index);
 app.use('/auth', auth);
 //app.use('/stories', stories);
 
-const port = process.env.PORT || 5002;
+const port = process.env.PORT || 5001;
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`)
