@@ -2,6 +2,10 @@
 
 <p>Welcome you all to story-book.io</p>
 <p>Here you can show your story to world.</p>
-<a href="/auth/google" class="red darken-1">
-    <i class="fa fa-google left"></i>Login with Google
-</a>
+{{#if user}}
+
+{{else}}
+    <a href="/auth/google" class="red darken-1">
+        <i class="fa fa-google left"></i>Login with Google
+    </a>
+{{/if}}
