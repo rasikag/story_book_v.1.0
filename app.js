@@ -20,6 +20,7 @@ const keys = require('./config/keys');
 
 // Map global promises
 mongoose.Promise = global.Promise;
+
 // Mongoose Connect
 mongoose.connect(keys.mongoURI)
   .then(() => console.log('MongoDB Connected'))
