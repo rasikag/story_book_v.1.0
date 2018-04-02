@@ -6,7 +6,12 @@ const User = mongoose.model('users');
 const {ensureAuthenticated, ensureGuest} = require('../helpers/auth');
 
 router.get('/',(req, res)=>{
-    res.render('stories/index');
+    Story.find({status: 'public'})
+        .then(stories => {
+            res.render('stories/index', {
+                stories: stories
+            });
+        });
 });
 
 router.get('/add', ensureAuthenticated, (req, res)=>{
