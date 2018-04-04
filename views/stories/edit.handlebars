@@ -25,7 +25,7 @@
         <div class="row">
             <p>
                 <input type="checkbox" name="allowComments" 
-                       id="filled-in-box" {{#if story.allowComments}}checked="checked" {{/if}} class="filled-in"/>
+                       id="filled-in-box" {{#if story.allowComments}} checked="checked" {{/if}} class="filled-in"/>
                 <label for="filled-in-box">Allow Comments</label>
             </p>
         </div>
@@ -33,7 +33,7 @@
         <div class="row">
             <div class="input-field">
                 <h5>Tell us your story:</h5>
-                <textarea name="body"></textarea>
+                <textarea name="body">{{story.body}}</textarea>
             </div>
         </div>
 
