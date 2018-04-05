@@ -97,10 +97,29 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id',(req, res) => {
-    Story.remove({_id: req.param.id})
+    Story.remove({_id: req.params.id})
         .then(() => {
             res.redirect('/dashboard')
         })
+});
+
+router.post('/comment/:id', (req, res) =>{
+    Story.findOne({
+        _id: req.params.id
+    })
+    .then(story => {
+        const newComment = {
+            commentBody: req.params.commentBody,
+            commentUser: req.user.id
+        }
+
+        story.comments.unshift(newComment);
+
+        story.save()
+            .then(story => {
+                res.redirect(`/stories/show/${story.id}`);
+            });
+    })
 });
 
 module.exports = router;
