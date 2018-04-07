@@ -110,7 +110,7 @@ router.post('/comment/:id', (req, res) =>{
     })
     .then(story => {
         const newComment = {
-            commentBody: req.params.commentBody,
+            commentBody: req.body.commentBody,
             commentUser: req.user.id
         }
 
